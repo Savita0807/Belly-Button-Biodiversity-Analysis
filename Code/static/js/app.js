@@ -1,4 +1,4 @@
-
+// Function to populate the demographic
 populate_demographic=(data, value) => {
   var Map_data = data.metadata;  
   Filter_Demo_data=(Map_data) => {
@@ -12,6 +12,7 @@ populate_demographic=(data, value) => {
   });
 };
 
+// Funcation to crate Bar graph
 bar_graph=(data, value) => {
   // var samples_load = d3.select("#bar");
   // samples_load.html("");
@@ -48,6 +49,7 @@ bar_graph=(data, value) => {
     Plotly.plot("bar", data_1, layout_1);
 };
 
+// Funcation to crate Bubble graph
 bubble_graph=(data, value) => {
 
   // var bubble_load = d3.select("#bubble");
@@ -86,22 +88,20 @@ bubble_graph=(data, value) => {
 
 };
 
+// First call to populate demographic, Bar graph and bubble graph
 d3.json("samples.json").then(function(data) {
-  // console.log(data.metadata);
   var  dropdown_load = d3.select("#selDataset");    
       data.names.forEach(name => {
       dropdown_load.append("option").attr("value",name).text(name);
-    
   });
     populate_demographic(data, data.names[0]); 
     bar_graph(data, data.names[0]);
     bubble_graph(data, data.names[0]);
 });
 
-
+// Call to populate demographic, Bar graph and bubble graph base on change value
 d3.json("samples.json").then(function(data) {
   optionChanged=(value) => {
-    // function to populate demographic
     populate_demographic(data, value);
     bar_graph(data, value);
     bubble_graph(data, value);
