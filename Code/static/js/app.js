@@ -25,28 +25,28 @@ bar_graph=(data, value) => {
   var slicedOTU_ids = otu_ids.slice(0,10);
   var slicedsample_value = sample_values.slice(0,10);
   var slicedOTU_lables = otu_labels.slice(0,10);
-
-  var trace1 = {
+  
+  
+  var bar_trace = {
     y: slicedOTU_ids.map(otuID => `OTU ${otuID}`).reverse(),
     x: slicedsample_value.reverse(),
     text: slicedOTU_lables.reverse(),
     type: "bar",
     orientation: "h"
-    };
-  
-    // data
-    var data_1 = [trace1];
-                      
-    //  Apply the group bar mode to the layout
-    var layout_1 = {
+  };
+ 
+  var bar_data = [bar_trace];
+                  
+  //  Apply the group bar mode to the layout
+    var bar_layout = {
     title: "Top 10 Bacteria Cultures Found",
     margin: {
          l: 150,
          t: 30
-       }
+    }
     };
-    // Render the plot to the div tag with id "plot"
-    Plotly.plot("bar", data_1, layout_1);
+  // Render the plot to the div tag with id "plot"
+  Plotly.newPlot("bar", bar_data, bar_layout);
 };
 
 // Funcation to crate Bubble graph
@@ -64,7 +64,7 @@ bubble_graph=(data, value) => {
   var Bub_sample_value = sample_values;
   var Bub_OTU_lables = otu_labels;
 
-  var trace2 = {
+  var bub_trace = {
     x: Bub_OTU_ids,
     y: Bub_sample_value,
     text: Bub_OTU_lables,
@@ -75,16 +75,16 @@ bubble_graph=(data, value) => {
     }
   };
   
-  var data_2 = [trace2];
+  var bub_data = [bub_trace];
   
-  var layout_2 = {
-    title: 'Marker Size',
+  var bub_layout = {
+    title: 'Cultures Bubble Chart',
     showlegend: false,
-    // height: 600,
-    // width: 600
+    height: 600,
+    width: 1500
   };
   
-  Plotly.plot('bubble', data_2, layout_2);
+  Plotly.newPlot('bubble', bub_data, bub_layout);
 
 };
 
