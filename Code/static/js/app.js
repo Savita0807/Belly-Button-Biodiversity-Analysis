@@ -1,4 +1,4 @@
-// Function to populate the demographic
+// Function to populate the demographic data from the sample.json in the dropdown menu
 populate_demographic=(data, value) => {
   var Map_data = data.metadata;  
   Filter_Demo_data=(Map_data) => {
@@ -12,10 +12,8 @@ populate_demographic=(data, value) => {
   });
 };
 
-// Funcation to crate Bar graph
+// Function to crate horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual
 bar_graph=(data, value) => {
-  // var samples_load = d3.select("#bar");
-  // samples_load.html("");
   var Sap_data = data.samples;  
   Filter_Samp_data=(Sap_data) => {
     return Sap_data.id == value
@@ -37,23 +35,19 @@ bar_graph=(data, value) => {
  
   var bar_data = [bar_trace];
                   
-  //  Apply the group bar mode to the layout
-    var bar_layout = {
+  var bar_layout = {
     title: "Top 10 Bacteria Cultures Found",
     margin: {
          l: 150,
          t: 30
     }
-    };
-  // Render the plot to the div tag with id "plot"
+  };
+   
   Plotly.newPlot("bar", bar_data, bar_layout);
 };
 
-// Funcation to crate Bubble graph
+// Funcation to crate Bubble graph that display each sample
 bubble_graph=(data, value) => {
-
-  // var bubble_load = d3.select("#bubble");
-  // bubble_load.html("");
   var Sap_bub_data = data.samples;  
   Filter_Bub_data=(Sap_bub_data) => {
     return Sap_bub_data.id == value
@@ -88,7 +82,49 @@ bubble_graph=(data, value) => {
 
 };
 
-// First call to populate demographic, Bar graph and bubble graph
+// Funcation to crate Gauge chart plot the weekly washing frequency of the individual
+gauge_graph=(data, value) => {
+  var gauge_data = data.metadata;  
+  Filter_gauge_data=(gauge_data) => {
+    return gauge_data.id == value
+  };
+  var Gauge_data = gauge_data.filter(Filter_gauge_data); 
+  let {wfreq} = Gauge_data[0];
+  var Wash_freq = wfreq;
+  var gaug_data = [
+    {
+      domain: { x: [0, 1], y: [0, 1] },
+      value: Wash_freq,
+      title: { text: "Belly Button Washing Frequency"},
+      subtitle: { text: "Scrubs per week"},            
+      type: "indicator",
+      mode: "gauge+number",
+      gauge: {
+        axis: { range: [0, 9],  tickmode: "array",
+                tickvals: ['1','2','3','4','5','6','7','8','9'],
+                ticktext: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9'], 
+                ticks: ""},
+        steps: [
+          { range: [0, 1], color: '#F8F3EC' },
+          { range: [1, 2], color: '#F4F1E5' },
+          { range: [2, 3], color: '#E9E6CA' },
+          { range: [3, 4], color: '#E2E4B1' },
+          { range: [4, 5], color: '#D5E49D' },
+          { range: [5, 6], color: '#B7CC92' },
+          { range: [6, 7], color: '#8CBF88' },
+          { range: [7, 8], color: '#8ABB8F' },
+          { range: [8, 9], color: '#85B48A' }
+        ],
+      }  
+    }
+  ];
+  
+  var gaug_layout = {width: 600, height: 500, margin: { t: 0, b: 0 } };
+  Plotly.newPlot('gauge', gaug_data, gaug_layout);
+
+};
+
+// First call to populate demographic, bar graph, bubble graph and gauge chart
 d3.json("samples.json").then(function(data) {
   var  dropdown_load = d3.select("#selDataset");    
       data.names.forEach(name => {
@@ -97,13 +133,15 @@ d3.json("samples.json").then(function(data) {
     populate_demographic(data, data.names[0]); 
     bar_graph(data, data.names[0]);
     bubble_graph(data, data.names[0]);
+    gauge_graph(data, data.names[0]);
 });
 
-// Call to populate demographic, Bar graph and bubble graph base on change value
+// Call to populate demographic, bar graph, bubble graph and gauge chart base on changed ID value
 d3.json("samples.json").then(function(data) {
   optionChanged=(value) => {
     populate_demographic(data, value);
     bar_graph(data, value);
     bubble_graph(data, value);
+    gauge_graph(data, value);
   };  
 });
