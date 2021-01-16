@@ -95,7 +95,7 @@ gauge_graph=(data, value) => {
     {
       domain: { x: [0, 1], y: [0, 1] },
       value: Wash_freq,
-      title: { text: "Belly Button Washing Frequency <br> Scrubs per Week"},
+      title: { text: "Belly Button Washing Frequency<br><span style='font-size:17px'> Scrubs per Week</span>"},
       type: "indicator",
       mode: "gauge+number",
       gauge: {
