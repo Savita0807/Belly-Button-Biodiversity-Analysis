@@ -1,6 +1,6 @@
 # Javascript-Plotly-challenge - Belly Button Biodiversity
 
-Github page for this challenge: https://savita0807.github.io/Javascript-Plotly-challenge/Code/
+Github page for this challenge: https://savita0807.github.io/Belly-Button-Biodiversity-Analysis/Code/index.html
 
 ![Bacteria by filterforge.com](Images/bacteria.jpg)
 
