@@ -4,66 +4,34 @@ Github page for this challenge: https://savita0807.github.io/Belly-Button-Biodiv
 
 ![Bacteria by filterforge.com](Images/bacteria.jpg)
 
-In this assignment, you will build an interactive dashboard to explore the [Belly Button Biodiversity dataset](http://robdunnlab.com/projects/belly-button-biodiversity/), which catalogs the microbes that colonize human navels.
+In this project, I have built an interactive dashboard to explore the Belly Button Biodiversity dataset, which catalogs the microbes that colonize human navels.
 
 The dataset reveals that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
 
-## Step 1: Plotly
+Tools:
+This project is achieved by using HTML & Plotly in combination with D3 & javascript
 
-1. Use the D3 library to read in `samples.json`.
+About the Data:
+Hulcr, J. et al.(2012) A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable. Retrieved from: http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/
 
-2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
+Details:
+The final application can be reached at https://savita0807.github.io/Belly-Button-Biodiversity-Analysis/Code/index.html which is hosted with the help of github pages.
 
-* Use `sample_values` as the values for the bar chart.
+Dahboard elements & Technical Details:
+1) Default View: When the dashboard is loaded calls init() function, which loads the dropdown with all available ids & displays demographics & charts for the first id in the list which is 940.
+![Dashboard](Images/first_img.PNG)
 
-* Use `otu_ids` as the labels for the bar chart.
+1) Demographics: Each time the dropdown selection is updated, calls a function optionChanged which takes id as parameter and filters the metadata & samples for selected id. optionChanged function calls three functions, one of them is to display demographic info: #### getMetadata : This function takes filtered metadata object as parameter & displays the demographic info about selected id. 
+![Dropdown](Images/Image-3.PNG)
 
-* Use `otu_labels` as the hovertext for the chart.
+2) Bar Graph: Another function that is invoked after the getMetadata fucntion from an optionChanged function is getPlot which takes filteres samples object for selected id. This function has two parts, one of it displays the Bar Graph: Bar graph is pretty simple, it is a generic plotly horizontal bar chart. For Bar chart, have taken only the top 10 values and added lables as hover over text.
+![Bar](Images/Image-4.PNG)
 
-  ![bar Chart](Images/hw01.png)
+3) Bubble Chart: The second part of the getPlot function displays the Bubble chart on the dashboard. The plot considers only two variables: otu_id and sample_values Used a generic bubble chart with not much manipulation.
+![Bubble](Images/Image-2.PNG)
 
-3. Create a bubble chart that displays each sample.
+4) Gauge Chart: Another function that is invoked after the getMetadata & getPlot fucntion from an optionChanged function is, getGauge. Which takes only washingfrequency as a parameter. This chart needed little bit manipulation(additional parameters) than basic Gauge chart. Followed the single-page-reference for Indicator Trace to add additional parameter.
+![Gauge](Images/Image-5.PNG)
 
-* Use `otu_ids` for the x values.
 
-* Use `sample_values` for the y values.
 
-* Use `sample_values` for the marker size.
-
-* Use `otu_ids` for the marker colors.
-
-* Use `otu_labels` for the text values.
-
-![Bubble Chart](Images/bubble_chart.png)
-
-4. Display the sample metadata, i.e., an individual's demographic information.
-
-5. Display each key-value pair from the metadata JSON object somewhere on the page.
-
-![hw](Images/hw03.png)
-
-6. Update all of the plots any time that a new sample is selected.
-
-Additionally, you are welcome to create any layout that you would like for your dashboard. An example dashboard is shown below:
-
-![hw](Images/hw02.png)
-
-## Advanced Challenge Assignment (Optional)
-
-The following task is advanced and therefore optional.
-
-* Adapt the Gauge Chart from <https://plot.ly/javascript/gauge-charts/> to plot the weekly washing frequency of the individual.
-
-* You will need to modify the example gauge code to account for values ranging from 0 through 9.
-
-* Update the chart whenever a new sample is selected.
-
-![Weekly Washing Frequency Gauge](Images/gauge.png)
-
-### About the Data
-
-Hulcr, J. et al.(2012) _A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable_. Retrieved from: [http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/](http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/)
-
-- - -
-
-© 2019 Trilogy Education Services
