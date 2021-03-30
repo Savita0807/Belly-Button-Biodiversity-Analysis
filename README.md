@@ -1,4 +1,4 @@
-# Javascript-Plotly-challenge - Belly Button Biodiversity
+# Belly Button Biodiversity Analysis
 
 Github page for this challenge: https://savita0807.github.io/Belly-Button-Biodiversity-Analysis/Code/index.html
 
